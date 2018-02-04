@@ -11,6 +11,7 @@ function hello() {
 
 \\\`\\\`\\\`lang
 code...\\\`\\\`\\\`
+
 \`lang\` is the programming language your code is written in (used for syntax highlighting and is optional), \`code\` is the code itself. So, the previous example would look like this:
 
 \\\`\\\`\\\`js
