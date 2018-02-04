@@ -14,10 +14,11 @@
   "author": "Ia_grib",
   "license": "Apache-2.0",
   "dependencies": {
-    "css-prettifier": "^0.1.6",
+    "css": "^2.2.1",
     "discord.js": "^11.3.0",
     "js-beautify": "^1.7.5",
     "language-classifier": "0.0.1",
     "pretty": "^2.0.0"
-  }
+  },
+  "repository": "https://github.com/iagrib/prettify-bot"
 }

@@ -15,7 +15,8 @@ const langs = {
 	c: ".c",
 	coffee: ".coffee",
 	"coffee-script": ".coffee",
-	coffeescript: ".coffee"
+	coffeescript: ".coffee",
+	json: ".json"
 }
 
 module.exports = lang => langs[lang] || "";
