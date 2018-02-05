@@ -13,7 +13,7 @@ bot.on("ready", () => {
 });
 
 bot.on("message", msg => {
-	if(!msg.mentions.users.has(bot.user.id) || msg.author.bot || !msg.channel.permissionsFor(guild.me).has("SEND_MESSAGES")) return;
+	if(!msg.mentions.users.has(bot.user.id) || msg.author.bot || !msg.channel.permissionsFor(msg.guild.me).has("SEND_MESSAGES")) return;
 
 	const promises = [];
 	const regex = /```(?:(\S*?)\n)?([^]*?)?```/g;
@@ -28,12 +28,11 @@ bot.on("message", msg => {
 			if(cmd) commands(cmd[1], msg);
 		} else {
 			const some = arr.some(e => e[0]);
-			msg.reply(`${some ? "I prettified your code and" : "Unfortunately I couldn't prettify your code, but I"} uploaded it to hastebin!
-
-${arr.map(d => `${d[1]}${some && !d[0] && " (failed to prettify this one, sorry!)" || ""}`).join("\n")}
-
-React with ❎ to remove this message.
-Say \`[@mention] info\` to find out more about this bot.`).then(m => m.react("❎").then(br => m.createReactionCollector((r, u) => u.id === msg.author.id && r.emoji.name === "❎", {time: 10000}).on("collect", m.delete.bind(m)).on("end", () => br.remove())));
+			const reply = `<@${msg.authod.id}> ${some ? "I prettified your code and" : "Unfortunately I couldn't prettify your code, but I"} uploaded it to hastebin!\n\n${arr.map(d => `${d[1]}${some && !d[0] && " (failed to prettify this one, sorry!)" || ""}`).join("\n")}\n\nSay \`[@mention] info\` to find out more about this bot.`;
+			msg.reply(`${reply}\n*React with ❎ to remove this message.*`).then(m => m.react("❎").then(br => m.createReactionCollector((r, u) => u.id === msg.author.id && r.emoji.name === "❎", {time: 10000}).on("collect", m.delete.bind(m)).on("end", () => {
+				m.edit(reply);
+				br.remove();
+			})));
 		}
 	}).catch(e => {
 		console.error(e);

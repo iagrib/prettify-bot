@@ -14,6 +14,6 @@ fs.readdir("./parts/langs", (e, dir) => {
 
 module.exports = {
 	prettify: (code, lang = detect(code)) => [lang, langs[lang] && langs[lang].prettify && langs[lang].prettify(code)],
-	comment: lang => langs[lang] ? langs[lang].comment : "// Uploaded with ❤ by prettify-bot",
+	comment: lang => langs[lang] && langs[lang].comment || "// Uploaded with ❤ by prettify-bot",
 	extension: lang => langs[lang] ? langs[lang].extension : ""
 }
