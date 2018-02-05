@@ -1,4 +1,5 @@
 module.exports = {
 	aliases: ["javascript", "js"],
-	run: require("js-beautify").js_beautify
+	prettify: require("js-beautify").js_beautify,
+	extension: ".js"
 }

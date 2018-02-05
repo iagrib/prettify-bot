@@ -1,9 +1,8 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client;
 
-const prettify = require("./parts/prettify");
+const langs = require("./parts/langs");
 const hastebin = require("./parts/hastebin");
-const resolveLang = require("./parts/resolveLang");
 const commands = require("./parts/commands");
 
 const {token} = require("./parts/token");
@@ -19,8 +18,8 @@ bot.on("message", msg => {
 	const promises = [];
 	const regex = /```(?:(\S*?)\n)?([^]*?)?```/g;
 	for(let match; match = regex.exec(msg.content);) {
-		const [lang, prettified] = prettify(match[2], match[1] && match[1].toLowerCase());
-		promises.push(hastebin(`${prettified || match[2]}\n\n// Uploaded with ❤ by prettify-bot`).then(link => [!!prettified, `${link}${resolveLang(lang)}`]));
+		const [lang, prettified] = langs.prettify(match[2], match[1] && match[1].toLowerCase());
+		promises.push(hastebin(`${prettified || match[2]}\n\n${langs.comment(lang)}`).then(link => [!!prettified, `${link}${langs.extension(lang)}`]));
 	}
 
 	Promise.all(promises).then(arr => {

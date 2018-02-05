@@ -1,4 +1,6 @@
 module.exports = {
 	aliases: ["html"],
-	run: require("pretty")
+	prettify: require("pretty"),
+	extension: ".html",
+	comment: "<!-- Uploaded with ❤ by prettify-bot -->"
 }
