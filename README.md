@@ -5,3 +5,7 @@ prettify-bot is a Discord bot that grabs users' code, prettifies and uploads it 
 ## todo
 
 * add prettify support for more languages
+
+## official invite link
+
+https://discordapp.com/api/oauth2/authorize?client_id=409800693927641098&permissions=0&scope=bot

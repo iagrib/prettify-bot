@@ -13,7 +13,7 @@ bot.on("ready", () => {
 });
 
 bot.on("message", msg => {
-	if(!msg.mentions.users.has(bot.user.id) || msg.author.bot) return;
+	if(!msg.mentions.users.has(bot.user.id) || msg.author.bot || !msg.channel.permissionsFor(guild.me).has("SEND_MESSAGES")) return;
 
 	const promises = [];
 	const regex = /```(?:(\S*?)\n)?([^]*?)?```/g;
