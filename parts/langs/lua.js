@@ -4,9 +4,9 @@ module.exports = {
 	aliases: ["lua"],
 	prettify: c => {
 		try {
-			return prettify(c);
+			return [true, prettify(c)];
 		} catch(e) {
-			return `--[[ prettify-bot failed to properly prettify your code!\nthis is most likely because it's invalid  ]]\n\n${c}`;
+			return [false, `--[[ prettify-bot failed to prettify your code!\nthis is most likely because it's invalid  ]]\n\n${c}`];
 		}
 	},
 	extension: ".lua",

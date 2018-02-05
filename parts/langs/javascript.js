@@ -1,5 +1,7 @@
+const {js_beautify: prettify} = require("js-beautify");
+
 module.exports = {
 	aliases: ["javascript", "js"],
-	prettify: require("js-beautify").js_beautify,
+	prettify: c => [true, prettify(c)],
 	extension: ".js"
 }

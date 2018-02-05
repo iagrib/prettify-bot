@@ -4,9 +4,9 @@ module.exports = {
 	aliases: ["css"],
 	prettify: c => {
 		try {
-			return css.stringify(css.parse(c), {inputSourcemaps: false, indent: "\t"});
+			return [true, css.stringify(css.parse(c), {inputSourcemaps: false, indent: "\t"})];
 		} catch(e) {
-			return `/* prettify-bot failed to properly prettify this stylesheet!\nthis is most likely because it's invalid */\n\n${c}`;
+			return [false, `/* prettify-bot failed to prettify this stylesheet!\nthis is most likely because it's invalid */\n\n${c}`];
 		}
 	},
 	extension: ".css",

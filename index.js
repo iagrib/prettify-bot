@@ -19,7 +19,7 @@ bot.on("message", msg => {
 	const regex = /```(?:(\S*?)\n)?([^]*?)?```/g;
 	for(let match; match = regex.exec(msg.content);) {
 		const [lang, prettified] = langs.prettify(match[2], match[1] && match[1].toLowerCase());
-		promises.push(hastebin(`${prettified || match[2]}\n\n${langs.comment(lang)}`).then(link => [!!prettified, `${link}${langs.extension(lang)}`]));
+		promises.push(hastebin(`${prettified[1] || match[2]}\n\n${langs.comment(lang)}`).then(link => [prettified[0], `${link}${langs.extension(lang)}`]));
 	}
 
 	Promise.all(promises).then(arr => {
@@ -28,7 +28,7 @@ bot.on("message", msg => {
 			if(cmd) commands(cmd[1], msg);
 		} else {
 			const some = arr.some(e => e[0]);
-			const reply = `<@${msg.author.id}> ${some ? "I prettified your code and" : "Unfortunately I couldn't prettify your code, but I"} uploaded it to hastebin!\n\n${arr.map(d => `${d[1]}${some && !d[0] && " (failed to prettify this one, sorry!)" || ""}`).join("\n")}\n\nSay \`[@mention] info\` to find out more about this bot.`;
+			const reply = `<@${msg.author.id}> ${some ? "I prettified your code and" : "Unfortunately I couldn't prettify your code, but I"} uploaded it to hastebin!\n\n${arr.map(d => `${d[1]}${some && !d[0] && " (couldn't prettify this one, sorry!)" || ""}`).join("\n")}\n\nSay \`[@mention] info\` to find out more about this bot.`;
 			msg.channel.send(`${reply}\n*React with ❎ to remove this message.*`).then(m => m.react("❎").then(br => m.createReactionCollector((r, u) => u.id === msg.author.id && r.emoji.name === "❎", {time: 10000}).on("collect", m.delete.bind(m)).on("end", () => {
 				m.edit(reply);
 				br.remove();
