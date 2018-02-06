@@ -24,7 +24,7 @@ bot.on("message", msg => {
 
 	Promise.all(promises).then(arr => {
 		if(!arr.length) { // No codeblocks found. Has the bot been mentioned for something else?
-			const cmd = msg.content.toLowerCase().match(RegExp(`^<@!?${bot.user.id}>\\s*(\\w*)`));
+			const cmd = msg.content.toLowerCase().match(new RegExp(`^<@!?${bot.user.id}>\\s*(\\w*)`));
 			if(cmd) commands(cmd[1], msg);
 		} else {
 			const some = arr.some(e => e[0]);
