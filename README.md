@@ -10,6 +10,8 @@ prettify-bot is a Discord bot that grabs users' code, prettifies and uploads it 
 
 https://discordapp.com/api/oauth2/authorize?client_id=409800693927641098&permissions=0&scope=bot
 
+(not guaranteed to run 24/7 as of now. you can try self-hosting it, though!)
+
 ## license info
 
 ```
