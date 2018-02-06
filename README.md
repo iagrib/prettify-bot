@@ -1,6 +1,6 @@
 # prettify-bot
 
-prettify-bot is a Discord bot that grabs users' code from codeblocks, prettifies and uploads it to hastebin for them. is does that with every message that has a codeblock in it and mentions the bot.
+prettify-bot is a Discord bot that can prettify users' code and upload it to hastebin for them, all they need to do is send the code in a codeblock and mention the bot in the same message!
 
 ## todo
 
