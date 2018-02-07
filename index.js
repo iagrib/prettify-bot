@@ -9,10 +9,8 @@ const {token} = require("./parts/token");
 
 bot.on("ready", () => {
 	console.log(`Connected and ready to serve ${bot.guilds.size} guilds.`);
-	bot.user.setPresence({game: {name: "@mention info"}});
+	bot.user.setPresence({game: {name: "[@mention] info"}});
 });
-
-bot.on("guildCreate", guild => console.log(`Joined guild ${guild.name} (${guild.id})!`));
 
 bot.on("message", msg => {
 	if(!msg.mentions.users.has(bot.user.id) || msg.author.bot || !msg.channel.permissionsFor(msg.guild.me).has("SEND_MESSAGES")) return;
