@@ -16,10 +16,10 @@
   "dependencies": {
     "css": "^2.2.1",
     "discord.js": "^11.3.0",
+    "html-beautify": "^1.0.4",
     "js-beautify": "^1.7.5",
     "language-classifier": "0.0.1",
-    "lua-fmt": "^2.5.0",
-    "pretty": "^2.0.0"
+    "lua-fmt": "^2.5.0"
   },
   "repository": "https://github.com/iagrib/prettify-bot"
 }

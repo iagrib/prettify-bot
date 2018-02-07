@@ -1,4 +1,4 @@
-const prettify = require("pretty");
+const prettify = require("html-beautify");
 
 module.exports = {
 	aliases: ["html"],
