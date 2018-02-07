@@ -23,7 +23,7 @@ bot.on("message", msg => {
 	const regex = /```(?:(\S*?)\n)?([^]*?)?```/g;
 	for(let match; match = regex.exec(msg.content);) {
 		const [lang, prettified] = langs.prettify(match[2], match[1] && match[1].toLowerCase());
-		promises.push(hastebin(`${prettified || match[2]}\n\n${langs.comment(lang)}`).then(link => [prettified[0], `${link}${langs.extension(lang)}`]));
+		promises.push(hastebin(`${prettified ? prettified[1] : match[2]}\n\n${langs.comment(lang)}`).then(link => [prettified[0], `${link}${langs.extension(lang)}`]));
 	}
 
 	Promise.all(promises).then(arr => {
