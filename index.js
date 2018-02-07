@@ -8,18 +8,22 @@ const commands = require("./parts/commands");
 const {token} = require("./parts/token");
 
 bot.on("ready", () => {
-	console.log("Connected.");
+	console.log(`Connected and ready to serve ${bot.guilds.size} guilds.`);
 	bot.user.setPresence({game: {name: "@mention info"}});
 });
 
+bot.on("guildCreate", guild => console.log(`Joined guild ${guild.name} (${guild.id})!`));
+
 bot.on("message", msg => {
 	if(!msg.mentions.users.has(bot.user.id) || msg.author.bot || !msg.channel.permissionsFor(msg.guild.me).has("SEND_MESSAGES")) return;
+
+	msg.channel.startTyping();
 
 	const promises = [];
 	const regex = /```(?:(\S*?)\n)?([^]*?)?```/g;
 	for(let match; match = regex.exec(msg.content);) {
 		const [lang, prettified] = langs.prettify(match[2], match[1] && match[1].toLowerCase());
-		promises.push(hastebin(`${prettified[1] || match[2]}\n\n${langs.comment(lang)}`).then(link => [prettified[0], `${link}${langs.extension(lang)}`]));
+		promises.push(hastebin(`${prettified || match[2]}\n\n${langs.comment(lang)}`).then(link => [prettified[0], `${link}${langs.extension(lang)}`]));
 	}
 
 	Promise.all(promises).then(arr => {
@@ -35,10 +39,9 @@ bot.on("message", msg => {
 			})));
 		}
 	}).catch(e => {
-		console.error(e);
-
+		console.error("Failed to upload to hastebin:", e);
 		msg.reply("Sorry, something went wrong. Couldn't upload your code!");
-	});
+	}).then(msg.channel.stopTyping.bind(msg.channel));
 });
 
 bot.login(token);
