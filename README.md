@@ -2,6 +2,21 @@
 
 prettify-bot is a Discord bot that can prettify users' code and upload it to hastebin for them, all they need to do is send the code in a codeblock and mention the bot in the same message!
 
+## showcase
+
+![](https://i.imgur.com/IbCUvv6.png)
+
+generated hastebin links:
+
+
+https://hastebin.com/yusepapida.js
+
+https://hastebin.com/vusejogoyi.lua
+
+https://hastebin.com/limepicaru.css
+
+https://hastebin.com/qizemicave.lua
+
 ## todo
 
 * add prettify support for more languages
