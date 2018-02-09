@@ -6,7 +6,7 @@ module.exports = {
 		try {
 			return [true, prettify(c)];
 		} catch(e) {
-			return [false, `--[[ prettify-bot failed to prettify your code!\nthis is most likely because it's invalid  ]]\n\n${c}`];
+			return [false, `--[[ prettify-bot failed to prettify this code!\nthis is most likely because it's invalid  ]]\n\n${c}`];
 		}
 	},
 	extension: ".lua",

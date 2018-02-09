@@ -18,7 +18,7 @@ bot.on("message", msg => {
 	msg.channel.startTyping();
 
 	const promises = [];
-	const regex = /```(?:(\S*?)\n)?([^]*?)?```/g;
+	const regex = /```(?:(\S*?)\n)?([^]+?)```/g;
 	for(let match; match = regex.exec(msg.content);) {
 		const [lang, prettified] = langs.prettify(match[2], match[1] && match[1].toLowerCase());
 		promises.push(hastebin(`${prettified ? prettified[1] : match[2]}\n\n${langs.comment(lang)}`).then(link => [prettified && prettified[0], `${link}${langs.extension(lang)}`]));
@@ -36,10 +36,11 @@ bot.on("message", msg => {
 				br.remove();
 			})));
 		}
+		msg.channel.stopTyping();
 	}).catch(e => {
 		console.error("Failed to upload to hastebin:", e);
 		msg.reply("Sorry, something went wrong. Couldn't upload your code!");
-	}).then(msg.channel.stopTyping.bind(msg.channel));
+	});
 });
 
 bot.login(token);
