@@ -21,12 +21,12 @@ bot.on("ready", () => {
 	bot.user.setPresence({game: {name: "[@mention] info"}});
 });
 
-bot.on("message", function handleMessage(msg, requester = msg.author, onlyCode) {
+bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
 	if(!msg.mentions.users.has(bot.user.id) || requester.bot || !msg.channel.permissionsFor(msg.guild.me).has("SEND_MESSAGES")) return;
 
 	if(re.code.test(msg.content)) { // There are codeblocks in the message
 		msg.channel.startTyping();
-		const flags = msg.content.match(re.flags)[1].split(" ").reduce((v, o) => o[v] = true, {});
+		const flags = oflags || msg.content.match(re.flags)[1].split(" ").reduce((o, v) => (o[v] = true, o), {});
 
 		const promises = [];
 		const regex = new RegExp(re.code);
@@ -36,7 +36,7 @@ bot.on("message", function handleMessage(msg, requester = msg.author, onlyCode) 
 		}
 
 		Promise.all(promises).then(arr => {
-			const some = arr.some(e => e[0]);
+			const some = !flags["no-prettify"] && arr.some(e => e[0]);
 			const reply = `${requester} ${flags["no-prettify"] ? "You specified `no-prettify` flag, so I didn't prettify your code, but I" : some ? "I prettified your code and" : "Unfortunately I couldn't prettify your code, but I"} uploaded it to hastebin!
 \n${arr.map(d => `${d[1]}${some && !d[0] && " (couldn't prettify this one, sorry!)" || ""}`).join("\n")}\n\nSay \`[@mention] info\` to find out more about this bot.`;
 
@@ -49,14 +49,14 @@ bot.on("message", function handleMessage(msg, requester = msg.author, onlyCode) 
 		return;
 	}
 	// No codeblocks found. Was the bot mentioned for something else?
-	if(onlyCode) return;
+	if(oflags) return; // 'flags' will only be defined when message is requested to be parsed by ID. We don't want to look for commands in it in that case
 
 	const cmd = msg.content.toLowerCase().match(re.cmd);
 	if(!cmd) return;
 
 	if(re.num.test(cmd[1])) { // If the command is numeric - try to fetch message with that id and parse codeblocks from it
 		msg.channel.startTyping();
-		msg.channel.fetchMessage(cmd[1]).then(m => handleMessage(m, requester, true)).catch(e => {
+		msg.channel.fetchMessage(cmd[1]).then(m => handleMessage(m, requester, msg.content.match(re.flags)[1].split(" ").reduce((o, v) => (o[v] = true, o), {}))).catch(e => {
 			console.error("Failed to fetch message with id", cmd[1], ":", e);
 			sendmessage(msg.channel, `${requester} Sorry, something went wrong. Couldn't find a message with that id in this channel.`, requester);
 		}).then(msg.channel.stopTyping.bind(msg.channel));
