@@ -36,7 +36,7 @@ The above codeblock will look like this (assuming the first line was replaced wi
 
 You can alter the way prettify-bot will process your message using flags.
 
-Here's a list of currently available flags:
+Here's a list of currently available flag~~s~~:
 
 * `no-prettify` - prettify-bot will not prettify your code, only upload it to hastebin
 

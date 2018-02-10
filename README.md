@@ -4,7 +4,7 @@ prettify-bot is a Discord bot that can prettify users' code and upload it to has
 
 ## about this branch
 
-version 1.1 of prettify-bot will these new features:
+version 1.1 of prettify-bot will have these new features:
 
 * **flags** such as `no-prettify` that allow you to alter how the bot will process your message
 * ability to request parsing of **another message** by specifying its id
