@@ -38,6 +38,13 @@ https://discordapp.com/api/oauth2/authorize?client_id=409800693927641098&permiss
 
 (not guaranteed to run 24/7 as of now. you can try self-hosting it, though!)
 
+## self-hosting
+
+if you're going to host prettify-bot yourself, after cloning/downloading the repo don't forget to create a `token.json` file in `/parts` directory with the following contents:
+```json
+{"token": "your.token.here"}
+```
+
 ## license info
 
 ```
