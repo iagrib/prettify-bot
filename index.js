@@ -41,14 +41,19 @@ bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
 		return;
 	}
 	// No codeblocks found. Was the bot mentioned for something else?
-	if(oflags) return; // 'flags' will only be defined when message is requested to be parsed by ID. We don't want to look for commands in it in that case
+	if(oflags) return true; // 'flags' will only be defined when message is requested to be parsed by ID. We don't want to look for commands in it in that case
 
 	const cmd = msg.content.toLowerCase().match(new RegExp(`^<@!?${bot.user.id}>\\s*(\\w*)`));
 	if(!cmd) return;
 
 	if(/^\d+$/.test(cmd[1])) { // If the command is numeric - try to fetch message with that id and parse codeblocks from it
 		msg.channel.startTyping();
-		msg.channel.fetchMessage(cmd[1]).then(m => handleMessage(m, requester, msg.content.match(new RegExp(`<@!?${bot.user.id}>\\s*([\\w- ]*)`))[1].split(" ").reduce((o, v) => (o[v] = true, o), {}))).catch(e => {
+		msg.channel.fetchMessage(cmd[1]).then(m => {
+			if(handleMessage(m, requester, msg.content.match(new RegExp(`<@!?${bot.user.id}>\\s*([\\w- ]*)`))[1].split(" ").reduce((o, v) => (o[v] = true, o), {}))) {
+				sendmessage(msg.channel, `${requester} That message doesn't seem to contain any codeblocks.`, requester);
+				msg.channel.stopTyping();
+			}
+		}).catch(e => {
 			console.error("Failed to fetch message with id", cmd[1], ":", e);
 			sendmessage(msg.channel, `${requester} Sorry, something went wrong. Couldn't find a message with that id in this channel.`, requester);
 		});
