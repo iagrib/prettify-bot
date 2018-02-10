@@ -14,7 +14,7 @@ bot.on("ready", () => {
 });
 
 bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
-	if(!msg.mentions.users.has(bot.user.id) || requester.bot || !msg.channel.permissionsFor(msg.guild.me).has("SEND_MESSAGES")) return;
+	if(!(oflags || msg.mentions.users.has(bot.user.id)) || requester.bot || !msg.channel.permissionsFor(msg.guild.me).has("SEND_MESSAGES")) return;
 
 	if(/```(?:(\S*?)\n)?([^]+?)```/.test(msg.content)) { // There are codeblocks in the message
 		if(!oflags) msg.channel.startTyping();
