@@ -25,7 +25,7 @@ bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
 	if(!msg.mentions.users.has(bot.user.id) || requester.bot || !msg.channel.permissionsFor(msg.guild.me).has("SEND_MESSAGES")) return;
 
 	if(re.code.test(msg.content)) { // There are codeblocks in the message
-		msg.channel.startTyping();
+		if(!oflags) msg.channel.startTyping();
 		const flags = oflags || msg.content.match(re.flags)[1].split(" ").reduce((o, v) => (o[v] = true, o), {});
 
 		const promises = [];
@@ -59,7 +59,7 @@ bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
 		msg.channel.fetchMessage(cmd[1]).then(m => handleMessage(m, requester, msg.content.match(re.flags)[1].split(" ").reduce((o, v) => (o[v] = true, o), {}))).catch(e => {
 			console.error("Failed to fetch message with id", cmd[1], ":", e);
 			sendmessage(msg.channel, `${requester} Sorry, something went wrong. Couldn't find a message with that id in this channel.`, requester);
-		}).then(msg.channel.stopTyping.bind(msg.channel));
+		});
 		return;
 	}
 
