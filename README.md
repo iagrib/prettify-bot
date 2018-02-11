@@ -2,6 +2,10 @@
 
 prettify-bot is a Discord bot that can prettify users' code and upload it to hastebin for them, all they need to do is send the code in a codeblock and mention the bot in the same message!
 
+## how to use
+
+see [info.md](https://github.com/iagrib/prettify-bot/blob/master/info.md).
+
 ## showcase
 
 ![](https://i.imgur.com/IbCUvv6.png)
@@ -26,6 +30,13 @@ https://hastebin.com/qizemicave.lua
 https://discordapp.com/api/oauth2/authorize?client_id=409800693927641098&permissions=0&scope=bot
 
 (not guaranteed to run 24/7 as of now. you can try self-hosting it, though!)
+
+## self-hosting
+
+if you're going to host prettify-bot yourself, after cloning/downloading the repo don't forget to create a `token.json` file in `/parts` directory with the following contents:
+```json
+{"token": "your.token.here"}
+```
 
 ## license info
 
