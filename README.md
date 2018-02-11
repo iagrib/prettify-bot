@@ -10,17 +10,6 @@ see [info.md](https://github.com/iagrib/prettify-bot/blob/master/info.md).
 
 ![](https://i.imgur.com/IbCUvv6.png)
 
-generated hastebin links:
-
-
-https://hastebin.com/yusepapida.js
-
-https://hastebin.com/vusejogoyi.lua
-
-https://hastebin.com/limepicaru.css
-
-https://hastebin.com/qizemicave.lua
-
 ## todo
 
 * add prettify support for more languages
@@ -30,6 +19,8 @@ https://hastebin.com/qizemicave.lua
 https://discordapp.com/api/oauth2/authorize?client_id=409800693927641098&permissions=0&scope=bot
 
 (not guaranteed to run 24/7 as of now. you can try self-hosting it, though!)
+
+you can also join [this server](https://discord.gg/VJryeSb) and try interacting with prettify-bot yourself.
 
 ## self-hosting
 
