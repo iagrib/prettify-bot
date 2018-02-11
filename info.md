@@ -39,6 +39,7 @@ You can alter the way prettify-bot will process your message using flags.
 Here's a list of currently available flag~~s~~:
 
 * `no-prettify` - prettify-bot will not prettify your code, only upload it to hastebin
+* *(more to come, if needed!)*
 
 Flags must directly follow the mention in your message and be lowercase, like so:
 
@@ -62,7 +63,7 @@ To be able to copy IDs of messages by right-clicking them, you must enable Devel
 
 ## Commands
 
-prettify-bot doesn't have a bit variety of commands, as of now only two are available: `info` and `source`.
+prettify-bot doesn't have a big variety of commands, as of now only three are available: `info`, `code` and `source`.
 
 Command prefix is the mention of prettify-bot itself:
 

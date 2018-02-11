@@ -8,6 +8,10 @@ const sendmessage = require("./parts/sendmessage");
 
 const {token} = require("./parts/token");
 
+function getflags(msg) {
+	return msg.content.match(new RegExp(`<@!?${bot.user.id}>\\s*([\\w- ]*)`))[1].split(" ").reduce((o, v) => (o[v] = true, o), {});
+}
+
 bot.on("ready", () => {
 	console.log(`Connected and ready to serve ${bot.guilds.size} guilds.`);
 	bot.user.setPresence({game: {name: "[@mention] info"}});
@@ -18,7 +22,7 @@ bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
 
 	if(/```(?:(\S*?)\n)?([^]+?)```/.test(msg.content)) { // There are codeblocks in the message
 		if(!oflags) msg.channel.startTyping();
-		const flags = oflags || msg.content.match(new RegExp(`<@!?${bot.user.id}>\\s*([\\w- ]*)`))[1].split(" ").reduce((o, v) => (o[v] = true, o), {});
+		const flags = oflags || getflags(msg);
 
 		const promises = [];
 		const regex = /```(?:(\S*?)\n)?([^]+?)```/g;
@@ -41,7 +45,7 @@ bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
 		return;
 	}
 	// No codeblocks found. Was the bot mentioned for something else?
-	if(oflags) return true; // 'flags' will only be defined when message is requested to be parsed by ID. We don't want to look for commands in it in that case
+	if(oflags) return true; // 'oflags' will only be defined when message is requested to be parsed by ID. We don't want to look for commands in it in that case
 
 	const cmd = msg.content.toLowerCase().match(new RegExp(`^<@!?${bot.user.id}>\\s*(\\w*)`));
 	if(!cmd) return;
@@ -49,7 +53,7 @@ bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
 	if(/^\d+$/.test(cmd[1])) { // If the command is numeric - try to fetch message with that id and parse codeblocks from it
 		msg.channel.startTyping();
 		msg.channel.fetchMessage(cmd[1]).then(m => {
-			if(handleMessage(m, requester, msg.content.match(new RegExp(`<@!?${bot.user.id}>\\s*([\\w- ]*)`))[1].split(" ").reduce((o, v) => (o[v] = true, o), {}))) {
+			if(handleMessage(m, requester, getflags(msg))) {
 				sendmessage(msg.channel, `${requester} That message doesn't seem to contain any codeblocks.`, requester);
 				msg.channel.stopTyping();
 			}
