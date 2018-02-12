@@ -5,6 +5,7 @@ const cmds = {
 Whenever you want me to do that, just send your code (in a codeblock) and mention me in the same message.
 
 Find out more about things I can do: <https://github.com/iagrib/prettify-bot/blob/master/info.md>`, msg.author),
+
 	code: msg => sendmessage(msg.channel, `${msg.author} Codeblocks:
 \\\`\\\`\\\`lang
 code...\\\`\\\`\\\`
@@ -17,6 +18,7 @@ console.log("Hello");
 Result:\`\`\`js
 console.log("Hello");
 // code goes here...\`\`\``, msg.author),
+
 	source: msg => sendmessage(msg.channel, `${msg.author} https://github.com/iagrib/prettify-bot`, msg.author)
 }
 

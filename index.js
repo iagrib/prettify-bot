@@ -7,6 +7,7 @@ const commands = require("./parts/commands");
 const sendmessage = require("./parts/sendmessage");
 
 const {token} = require("./parts/token");
+const blacklist = require("./parts/blacklist");
 
 function getflags(msg) {
 	return msg.content.match(new RegExp(`<@!?${bot.user.id}>\\s*([\\w- ]*)`))[1].split(" ").reduce((o, v) => (o[v] = true, o), {});
@@ -18,9 +19,9 @@ bot.on("ready", () => {
 });
 
 bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
-	if(!(oflags || msg.mentions.users.has(bot.user.id)) || requester.bot || !msg.channel.permissionsFor(msg.guild.me).has("SEND_MESSAGES")) return;
+	if(blacklist[msg.guild.id] || !(oflags || msg.mentions.users.has(bot.user.id)) || requester.bot || !msg.channel.permissionsFor(msg.guild.me).has("SEND_MESSAGES")) return;
 
-	if(/```(?:(\S*?)\n)?([^]+?)```/.test(msg.content)) { // There are codeblocks in the message
+	if(/```(?:\S*?\n)?[^]+?```/.test(msg.content)) { // There are codeblocks in the message
 		if(!oflags) msg.channel.startTyping();
 		const flags = oflags || getflags(msg);
 
@@ -38,7 +39,7 @@ bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
 
 			sendmessage(msg.channel, reply, requester);
 		}).catch(e => {
-			console.error("Failed to upload to hastebin:", e);
+			console.error(`Couldn't upload code to hastebin from channel ${msg.channel.id} (${msg.channel.name}) in guild ${msg.guild.id} (${msg.guild.name}) in response to ${requester.id} (${requester.tag}):`, e);
 			sendmessage(msg.channel, `${requester} Sorry, something went wrong. Couldn't upload the code to hastebin.`, requester);
 		}).then(msg.channel.stopTyping.bind(msg.channel));
 
@@ -57,10 +58,7 @@ bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
 				sendmessage(msg.channel, `${requester} That message doesn't seem to contain any codeblocks.`, requester);
 				msg.channel.stopTyping();
 			}
-		}).catch(e => {
-			console.error("Failed to fetch message with id", cmd[1], ":", e);
-			sendmessage(msg.channel, `${requester} Sorry, something went wrong. Couldn't find a message with that id in this channel.`, requester);
-		});
+		}).catch(() => sendmessage(msg.channel, `${requester} Couldn't find a message with that id in this channel.`, requester));
 		return;
 	}
 
