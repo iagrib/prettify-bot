@@ -4,6 +4,7 @@
   * [Codeblocks](#codeblocks)
   * [Flags](#flags)
   * [By message ID](#by-message-id)
+  * [Cooldowns](#cooldowns)
 * [Commands](#commands)
 
 ## Code parsing
@@ -60,6 +61,14 @@ You can make prettify-bot parse another message without reposting the code from 
 Flags are also available here, as you can see.
 
 To be able to copy IDs of messages by right-clicking them, you must enable Developer Mode in `Settings > Appearance > Advanced > Developer Mode`.
+
+### Cooldowns
+
+*This section might not apply to instances of prettify-bot self-hosted by other users.*
+
+Because the bot is public, a system limiting its usage to prevent abuse was implemented. It's not very strict and you shouldn't normally run into cooldowns, but if you do, just wait a minute or two before you can use the bot again.
+
+Intentional abuse of the bot will lead to manual blacklisting of abusing user/guild.
 
 ## Commands
 

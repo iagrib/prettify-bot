@@ -1,3 +1,5 @@
+"use strict";
+
 const sendmessage = require("./sendmessage");
 
 const cmds = {
