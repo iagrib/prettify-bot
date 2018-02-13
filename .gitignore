@@ -57,5 +57,4 @@ typings/
 # dotenv environment variables file
 .env
 
-parts/token.json
-parts/connection
+parts/config.json

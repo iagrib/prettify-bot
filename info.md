@@ -4,6 +4,7 @@
   * [Codeblocks](#codeblocks)
   * [Flags](#flags)
   * [By message ID](#by-message-id)
+  * [Cooldowns](#cooldowns)
 * [Commands](#commands)
 
 ## Code parsing
@@ -60,6 +61,18 @@ You can make prettify-bot parse another message without reposting the code from 
 Flags are also available here, as you can see.
 
 To be able to copy IDs of messages by right-clicking them, you must enable Developer Mode in `Settings > Appearance > Advanced > Developer Mode`.
+
+### Language detection
+
+If you don't specify the language of your codeblock, prettify-bot will try to detect it automatically. The detection is not precise and can only detect a limited amount of languages, so it is always better to specify the lang yourself properly - it will be used to actually prettify your code and append a proper extension to hastebin link so that the snipped is highlighted correctly.
+
+### Cooldowns
+
+*This section might not apply to instances of prettify-bot self-hosted by other users.*
+
+Because the bot is public, a system limiting its usage to prevent abuse was implemented. It's not very strict and you shouldn't normally run into cooldowns, but if you do, just wait a minute or two before you can use the bot again.
+
+Intentional abuse of the bot will lead to manual blacklisting of abusing user/guild.
 
 ## Commands
 
