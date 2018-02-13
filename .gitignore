@@ -58,4 +58,3 @@ typings/
 .env
 
 parts/config.json
-parts/connection
