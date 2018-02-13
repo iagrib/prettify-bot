@@ -14,5 +14,5 @@ setInterval(() => {
 
 module.exports = {
 	add: (id, n) => limits[id] = [Date.now(), (limits[id] ? limits[id][1] : 0) + n],
-	get: id => limits[id] && limits[id][1] > lmax
+	get: id => limits[id] && limits[id][1] >= lmax
 };
