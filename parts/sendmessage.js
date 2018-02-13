@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function sendmessage(channel, body, requester) {
+module.exports = (channel, body, requester) => {
 	const content = `${requester} ${body}`;
 	let deleted;
 	channel.send(`${content}\n*React with ❎ to remove this message.*`).then(msg => msg.react("❎").then(reaction => msg.createReactionCollector((r, u) => u.id === requester.id && r.emoji.name === "❎", {time: 10000}).on("collect", () => {

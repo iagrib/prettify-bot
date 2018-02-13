@@ -9,7 +9,7 @@ const commands = require("./parts/commands");
 const sendmessage = require("./parts/sendmessage");
 const limits = require("./parts/limits");
 
-const {token, mmax = 2} = require("./parts/config");
+const {token, mmax = 4} = require("./parts/config");
 const blacklist = require("./parts/blacklist");
 
 function getflags(msg) {
