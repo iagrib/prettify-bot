@@ -62,6 +62,10 @@ Flags are also available here, as you can see.
 
 To be able to copy IDs of messages by right-clicking them, you must enable Developer Mode in `Settings > Appearance > Advanced > Developer Mode`.
 
+### Language detection
+
+If you don't specify the language of your codeblock, prettify-bot will try to detect it automatically. The detection is not precise and can only detect a limited amount of languages, so it is always better to specify the lang yourself properly - it will be used to actually prettify your code and append a proper extension to hastebin link so that the snipped is highlighted correctly.
+
 ### Cooldowns
 
 *This section might not apply to instances of prettify-bot self-hosted by other users.*
