@@ -1,12 +1,6 @@
-# prettify-bot, v1.2
+# prettify-bot
 
 prettify-bot is a Discord bot that can prettify users' code and upload it to hastebin for them, all they need to do is send the code in a codeblock and mention the bot in the same message!
-
-## about this branch
-
-v1.2 implements a basic protection from abuse of this bot by spamming codeblocks. this obviously won't guarantee full spam protection, but is a nice addition to having abusers manually blacklisted.
-
-this branch will be merged into `master` once it's finished, tested and proven to be stable. as of now, it's not tested: might not work, might have bugs.
 
 ## showcase
 
