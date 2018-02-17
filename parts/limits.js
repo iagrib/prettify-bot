@@ -13,6 +13,6 @@ setInterval(() => {
 }, lms);
 
 module.exports = {
-	add: (id, n) => limits[id] = [Date.now(), (limits[id] ? limits[id][1] : 0) + n],
+	add: (id, n = 1) => limits[id] = [Date.now(), (limits[id] ? limits[id][1] : 0) + n],
 	get: id => limits[id] && limits[id][1] >= lmax
 };

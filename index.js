@@ -41,7 +41,7 @@ bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
 		for(let match; match = regex.exec(msg.content);) {
 			if(promises.length === mmax) break;
 			const [lang, prettified] = langs.prettify(match[2], match[1] && match[1].toLowerCase());
-			promises.push(hastebin(`${(!flags["no-prettify"] && prettified) ? prettified[1] : match[2]}\n\n${langs.comment(lang)}`).then(link => [prettified && prettified[0], `${link}${langs.extension(lang)}`]));
+			promises.push(hastebin(`${(!flags["no-prettify"] && prettified) ? prettified[1] : match[2]}\n\n${langs.comment(lang)}`).then(url => [prettified && prettified[0], `${url}${langs.extension(lang)}`]));
 		}
 
 		Promise.all(promises).then(arr => {
@@ -52,7 +52,7 @@ bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
 			sendmessage(msg.channel, reply, requester);
 		}).catch(e => {
 			console.error(`Couldn't upload code to hastebin from channel ${msg.channel.id} (${msg.channel.name}) in guild ${msg.guild.id} (${msg.guild.name}) in response to ${requester.id} (${requester.tag}):`, e);
-			sendmessage(msg.channel, "Sorry, something went wrong. Couldn't upload the code to hastebin.", requester);
+			sendmessage(msg.channel, "Sorry, something went wrong. Couldn't upload the code to hastebin. (Is it down?)", requester);
 		}).then(msg.channel.stopTyping.bind(msg.channel));
 
 		return;
