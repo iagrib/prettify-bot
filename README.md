@@ -34,7 +34,7 @@ if you're going to host prettify-bot yourself, after cloning/downloading the rep
 ```
 `token` is your bot token;
 `mmax` is the maximum amount of codeblocks per message;
-`lmax`, `lreset` and `lms` are values used for the cooldown system (see [limits.js](https://github.com/iagrib/prettify-bot/blob/v1.2/parts/limits.js) or just leave the default values if you don't understand what's happening there).
+`lmax`, `lreset` and `lms` are values used for the cooldown system (see [limits.js](https://github.com/iagrib/prettify-bot/blob/master/parts/limits.js) or just leave the default values if you don't understand what's happening there).
 
 ## license info
 
