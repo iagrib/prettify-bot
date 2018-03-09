@@ -70,7 +70,7 @@ bot.on("message", function handleMessage(msg, requester = msg.author, oflags) {
 				sendmessage(msg.channel, "That message doesn't seem to contain any codeblocks.", requester);
 				msg.channel.stopTyping();
 			}
-		}).catch(() => sendmessage(msg.channel, "Couldn't find a message with that id in this channel.", requester));
+		}).catch(sendmessage.bind(null, msg.channel, "Couldn't find a message with that id in this channel.", requester));
 		return;
 	}
 
