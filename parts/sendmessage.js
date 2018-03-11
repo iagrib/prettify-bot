@@ -11,5 +11,5 @@ module.exports = (channel, body, requester) => {
 			msg.edit(content);
 			reaction.remove();
 		}
-	}))).catch(e => console.error(`Couldn't send message to channel ${channel.id} (${channel.name}) in guild ${channel.guild.id} (${channel.guild.name}) in response to ${requester.id} (${requester.tag}):`, e));
+	}))).catch(console.error.bind(console, `Couldn't send message to channel ${channel.id} (${channel.name}) in guild ${channel.guild.id} (${channel.guild.name}) in response to ${requester.id} (${requester.tag}):`));
 }
